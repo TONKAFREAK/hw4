@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 class BinaryTree {
     static class Node {
         int data;
@@ -6,6 +9,7 @@ class BinaryTree {
         Node(int data) {
             this.data = data;
             left = right = null;
+
         }
     }
 
@@ -66,46 +70,46 @@ class BinaryTree {
 
     // ------------ Traversals ------------
 
-    public void inorder() {
-        inorderRec(root);
-        System.out.println();
+    public void inorder(PrintWriter pw) throws Exception {
+        inorderRec(root, pw);
+        pw.println();
     }
 
-    private void inorderRec(Node root) {
+    private void inorderRec(Node root, PrintWriter pw) {
         if (root != null) {
-            inorderRec(root.left);
-            System.out.print(root.data + " ");
-            inorderRec(root.right);
+            inorderRec(root.left, pw);
+            pw.print(root.data + " ");
+            inorderRec(root.right, pw);
         }
     }
 
     // -------------------------
 
-    public void preorder() {
-        preorderRec(root);
-        System.out.println();
+    public void preorder(PrintWriter pw) {
+        preorderRec(root, pw);
+        pw.println();
     }
 
-    private void preorderRec(Node root) {
+    private void preorderRec(Node root, PrintWriter pw) {
         if (root != null) {
-            System.out.print(root.data + " ");
-            preorderRec(root.left);
-            preorderRec(root.right);
+            pw.print(root.data + " ");
+            preorderRec(root.left, pw);
+            preorderRec(root.right, pw);
         }
     }
 
     // -------------------------
 
-    public void postorder() {
-        postorderRec(root);
-        System.out.println();
+    public void postorder(PrintWriter pw) {
+        postorderRec(root, pw);
+        pw.println();
     }
 
-    private void postorderRec(Node root) {
+    private void postorderRec(Node root, PrintWriter pw) {
         if (root != null) {
-            postorderRec(root.left);
-            postorderRec(root.right);
-            System.out.print(root.data + " ");
+            postorderRec(root.left, pw);
+            postorderRec(root.right, pw);
+            pw.print(root.data + " ");
         }
     }
 
@@ -121,16 +125,16 @@ class BinaryTree {
         return 1 + countRec(root.left) + countRec(root.right);
     }
 
-    public void printChildren() {
-        printChildrenRec(root);
+    public void printChildren(PrintWriter pw) {
+        printChildrenRec(root, pw);
     }
 
-    private void printChildrenRec(Node root) {
+    private void printChildrenRec(Node root, PrintWriter pw) {
         if (root != null) {
             int children = (root.left != null ? 1 : 0) + (root.right != null ? 1 : 0);
-            System.out.println("Node " + root.data + " has " + children + " children.");
-            printChildrenRec(root.left);
-            printChildrenRec(root.right);
+            pw.println("Node \"" + root.data + "\" has " + children + " children.");
+            printChildrenRec(root.left, pw);
+            printChildrenRec(root.right, pw);
         }
     }
 }

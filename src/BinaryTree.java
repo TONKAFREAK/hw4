@@ -11,7 +11,7 @@ class BinaryTree {
 
     private Node root;
 
-    // ------ methods ---------
+    // ------ Methods ---------
 
     public void insert(int value) {
         root = insertRec(root, value);
@@ -36,15 +36,18 @@ class BinaryTree {
     }
 
     private Node deleteRec(Node root, int value) {
-        if (root == null) return root;
+        if (root == null)
+            return root;
 
         if (value < root.data) {
             root.left = deleteRec(root.left, value);
         } else if (value > root.data) {
             root.right = deleteRec(root.right, value);
         } else {
-            if (root.left == null) return root.right;
-            if (root.right == null) return root.left;
+            if (root.left == null)
+                return root.right;
+            if (root.right == null)
+                return root.left;
 
             root.data = minValue(root.right);
             root.right = deleteRec(root.right, root.data);
@@ -92,7 +95,7 @@ class BinaryTree {
     }
 
     // -------------------------
-    
+
     public void postorder() {
         postorderRec(root);
         System.out.println();
@@ -113,7 +116,8 @@ class BinaryTree {
     }
 
     private int countRec(Node root) {
-        if (root == null) return 0;
+        if (root == null)
+            return 0;
         return 1 + countRec(root.left) + countRec(root.right);
     }
 
